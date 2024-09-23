@@ -1,0 +1,432 @@
+/* Start Variables */
+:root{                    /*علشان نعمل متغير لون هنعمل روت وجواه ندى اى اسم بالطريقه دى ثم درجة اللون*/
+    --main-color: #10cab7;
+    --secondary-color: #2c4755;
+    --section-padding: 60px 0;  /*هنعمل البادينج اللى بنستخدمه فى السيكشن*/
+    --section-background: #f6f6f6;  /*هنعمل اللون اللى بنستخدمه كمان فى السيكشن*/
+}
+/* End Variables */
+
+/* Start Global Rules */
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;   /*علشان اى اسكرول يحصل فى الصفحه يكون سلوكه ناعم ودى مش متوافقه مع كل المتصفحات*/
+}
+body{
+    font-family: "Work Sans", sans-serif;
+}
+.container{                    /* اعدادات الكونتنر اللى هنشتغل كل حاجه جواه بالنسبه للهيد */
+   /* width: 600px; */         /* عرض الكونتنر اللى هنشتغل عليه المشروع ملوش لازمه لان هناخده من شاشات الميديا فهنوقفه*/
+    padding: 0 15px;           /* بادينج من اليمين والشمال ب15 ومن فوق وتحت ب0 */
+    margin-right: auto;        
+    margin-left: auto;
+    /* background: lightblue; */
+}
+/*المقاسات الجايه دى بتخلى التصميم متجاوب مع كل مقاسات الشاشات من التليفون للبى سى*/
+/* Small */
+@media(min-width: 768px){
+    .container{
+        width: 750px;
+    }
+}
+/* Medium */
+@media(min-width: 992px){
+    .container{
+        width: 970px;
+    }
+}
+/* Large */
+@media(min-width: 1200px){
+    .container{
+        width: 1170px;
+    }
+}
+/* End Global Rules */
+
+/* Start Components */     /*هنكتب هنا عناصر هنستخدمها اكتر من مره وليها نفس التسيق*/
+.special-heading{         /*دى الكلمه الكبيره المتهدنه شويه فوق اسيرفيس*/
+    color: #ebeced;
+    font-size: 100px;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: -3px;
+    margin: 0;
+}
+.special-heading + p{       /*هنا بقوله هاتلى البرجراف اللى بعد الاسبيشيل هيدن على طول فقط يعنى مش هيأثر على اى برجراف غير اللى بعد الكلاس ده*/
+    margin: -30px;
+    text-align: center;
+    font-size: 20px;
+    color: #797979;
+}
+@media(max-width: 767px){       /* هنلاقى مع الشاشات الصغيره الجزء اللى فيه الكلمه الهيدن باظ فهنعملها ميديا*/
+    .special-heading{
+        font-size: 60px;
+    }
+    .special-heading + p{
+        margin: -15px;
+    }
+}
+/* End Components */    
+
+/* Start Header */
+.header{
+    padding: 20;
+   /* background: yellow; */
+}
+.header .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .logo{
+    width: 60px;
+}
+.header .links{
+    position: relative;    /* هنخلى الاب بوزيشن ريليتف علشان هنخلى بعد كده اللينكات جواه بوزيشن ابسليوت*/
+}
+.header .links:hover .icon span:nth-child(2){   /*لما نعمل هوفر على اللينك الكود هيتنفذ على الاسبان التانيه اللى جوه الايكون*/
+    width: 100%;
+}
+.header .links .icon{     /* ده الاب بتاع الايكون اللى عايزين نعملها */
+    width: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.header .links .icon span{     /* دى الايكون نفسها بنعملها بادينا*/
+    background: #333;        /*لون البار بتاع الايكون*/
+    margin-bottom: 5px;        /*علشان ميلزقوش فى بعض*/
+    height: 2px;
+}
+.header .links .icon span:first-child{   /* كل خط ليه طول فهنوصل لكل اسبان على حدى بالطريقه دى*/
+    width: 100%;
+}
+.header .links .icon span:nth-child(2){
+    width: 70%;
+    transition: .3s;                  /*هنخليها توصل ل 100فالميه لما نهوفر على اللينك*/
+}
+.header .links .icon span:last-child{
+    width: 100%;
+}
+.header .links ul{     /* هنشتغل على القائمه اللى فيها اللينكات*/
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #f6f6f6;
+    position: absolute;   /*هندى ابسليوت زى ما قولنا فوق فهنلاقى الليسته خرجت بره فهنديلها فى اليمين صفر علشان تبدء من اول الايكون اللى عملناها*/
+    right: 0;
+    min-width: 200px;
+    top: calc(100% + 15px);  /*بنقوله من فوق خليك ميه فى الميه بس زود 15بكسل علشان هنعمل فيهم السهم*/
+    display: none;           /*هنخفيها علشان نخليها تظهر لما نروح على الايكون*/
+    z-index: 1;
+}
+.header .links ul::before{     /* هنعمل على القائمة سهم*/
+    content: '';
+    border-width: 10px;        /*علشان تيجى فى نص الايكونه اللى عاملينها وكان عرضها 30 وعنديها ريت 5*/
+    border-style: solid;
+    border-color: transparent transparent #f6f6f6 transparent;   /*اللون هنا لعمل السهم بياخد 3 الوان شفاف واتجاه السهم بندى اللون اللى عايزينه*/
+    position: absolute;
+    right: 5px;
+    top: -20px;
+}
+.header .links:hover ul{      /*لما اقف على اللينك الليسته تظهر وده بيتعمل بعد كده بالجافاسكربت*/
+    display: block;
+}
+.header .links ul li a{        /*تنسيقات على اللينكات*/
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 15px;
+    transition: 0.3s;
+}
+.header .links ul li a:hover{    /*لما نيجى على اللينك يروح ناحية اليمين فهنعمله بادينج من الشمال*/
+    padding-left: 25px;
+}
+.header .links ul li:not(:last-child) a {    /*نفذ الكود ده على كل عناصر اللسته ماعدا الاخير وهيتنفذ على الينك */
+    border-bottom: 1px solid #ddd;
+}
+/* End Header */
+
+/* Start Landing Section */
+.landing{
+    background-image: url(../images/Snow_Mountain.jpg);
+    background-size: cover;
+    height: calc(100vh - 60px);   /*حذفنا منالصوره مقاس الهيد علشان متخرجش بره الفيو وتعمل اسكرول*/
+    position: relative;           /*هنحط هنا فى الاب ريليتف علشان نخلى الابن بوزيشن ابسليوت كما يلى*/
+}
+.landing .intro-text{
+    position: absolute;            /*علشان نظبط الكلام فى السنتر هندى فوق وشمال 50فالميه وهنعمل ترنسليت بمينص 50*/
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;               /*علشان النص يعمل محازاه مع بعضه*/
+    width: 320px;                     /*هنبص على الموبايل هنلاقى الكلام نازل تحت بعضه فهندى العرض ده وكمان هنعمل اكبر عرض ميه فالميه علشان يتناسب مع الشاشات كلها*/
+    max-width: 100%;
+}
+.landing .intro-text h1{
+    margin: 0;                /*شيلنا المرارجن علشان كان عامل مساحه بيضه فوق الصوره*/
+    font-weight: bold;
+    font-size: 50px;
+    color: var(--main-color);  /*بنستدعى اللون اللى عملناه متغير فى فار بالطريقه دى */
+}
+.landing .intro-text p{
+    font-size: 19px;
+    line-height: 1.8;
+}
+/* End Landing Section */
+
+/* Start Features */
+.features{
+    padding: var(--section-padding);
+    background-color: var(--section-background, #333);   /*هنا جنب المتغير ممكن نعمل كومه و نستخدم فور باك وهو حاجه بيرجع ليها وينفذها لو ملقاش المتغير*/
+}
+.features .container{      /*الاب المباشر للفوتشيرز*/
+    display: grid;         /*هنستخدم المره دى الجريد*/
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));    /*بنقوله املى الاعمده تلقائى اقل مساحه تكون 300 واكبر مساحه قسم بينهم بالتساوى يعنى لو المساحه كانت 800 هيكون اتنين جنب بعض والتالت ينزل تحت*/
+    gap: 20px;
+}
+.features .feat{
+    padding: 20px;
+    text-align: center;
+}
+.features .feat i{
+    color: var(--main-color);
+}
+.features .feat h3{
+    font-weight: 800;       /*الاكسترا بولد فى خطوط جوجل بيكون الويت بتاعها 800*/
+    margin: 30px 0;
+}
+.features .feat p{
+    line-height: 1.8;
+    color: #777;
+    font-size: 17px;
+}
+/* End Features */
+
+/* Start Services */
+.services{
+    padding: var(--section-padding);
+}
+.services .services-content{
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  /*لاحظ اننا هنا مديناش عدد اعمده ولكن خليناها اوتو علشان نسيب حجم الشاشه هو اللى يتحكم ولكن ادينالها اقل مقاس*/
+    gap: 30px;
+    margin-top: 100px;
+}
+.services .services-content .srv{
+  display: flex;
+  margin-bottom: 40px;
+} 
+@media(max-width: 767px){               /*هنخليها فى الموبايل تتعرض عمودى*/
+    .services .services-content .srv{
+        flex-direction: column;
+        text-align: center;
+    }
+}
+.services .services-content .srv i{
+    color: var(--main-color);
+    flex-basis: 60px;
+}
+.services .services-content .srv .text{     
+    flex: 1;                              /*فليكس بواد هتعمل مسافه بين الديف بتاع التيكست وبين الايكونات*/
+}
+.services .services-content .srv .text h3{
+    margin: 0 0 20px;                      /*هنلغى المارجن بتاع الاتش 3 من فوق علشان توازى ارتفاع الايكونات ونديها من تحت 20*/
+}
+.services .services-content .srv .text p{
+    color: #444;
+    font-weight: 300;
+    line-height: 1.6;
+}
+.services .services-content .image{
+   text-align: center;
+   position: relative;
+}
+.services .services-content .image::before{   /*المربع اللى جنب الصورة*/
+    content: '';
+    position: absolute;
+    right: 0;
+    background: var(--secondary-color);
+    width: 80px;
+    height: calc(100% + 100px);
+    top: -50px;
+    z-index: -1;
+}
+.services .services-content .image img{
+    width: 260px;
+}
+@media(max-width: 1199px){     /*قبل المقاس ده الصوره لوحدها شكلها وحس وفيها مشاكل فهنلغي ظهورها قبله*/
+    .img-col{
+        display: none;
+    }
+}
+/* End Services */
+
+/* Start Portfolio */
+.Portfolio{
+    padding: var(--section-padding);
+    background-color: var(--section-background);
+}
+.Portfolio .Portfolio-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 30px;
+    margin-top: 100px;
+}
+.Portfolio .Portfolio-content .card{
+    background-color: white;
+}
+.Portfolio .Portfolio-content img{
+    width: 100%;                   /*مجرد ما بندى العرض للصور ميه فى الميه من الاب مقاسها بيتظبط جوه الاب والافضل يكون مقاس الصور فى الاصل واحد على الاقل فى الارتفاع*/
+}
+.Portfolio .Portfolio-content .info{
+    padding: 20px;
+}
+.Portfolio .Portfolio-content .info h3{
+    margin: 0;
+}
+.Portfolio .Portfolio-content .info p{
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+/* End Portfolio */
+
+/* Start About */
+/* Start About */
+.about{
+    padding: var(--section-padding);
+}
+.about .about-content{
+    margin-top: 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 991px){             /*هنلاقى مشكله بتحصل عند شاشات الموبايل فهنعدل فيها هنا وفى البيفور والافتر بتاعت الصوره*/
+    .about .about-content{
+        flex-direction: column;
+        text-align: center;
+        flex-basis: 300px;     /*علشان النص ميخرجش بره الشاشه ويعمل سليدر واستخدمنا دى بدل العرض علشان نستفيد من الفليكس والحاجه تيجى فى النص*/
+    }
+}
+.about .about-content .image{
+    position: relative;
+    width: 250px;
+    height: 350px;
+}
+.about .about-content .image::before{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: calc(100% + 100px);
+    background-color: #ebeced;
+    top: -50px;
+    left: -20px;
+    z-index: -1;
+}
+.about .about-content .image::after{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 250px;
+    border-left: 80px solid var(--main-color);
+    border-bottom: 60px solid var(--main-color);
+    top: -25px;
+    right: -120px;
+    z-index: -1;
+}
+@media (max-width: 991px){
+    .about .about-content .image::before,
+    .about .about-content .image::after{
+        display: none;
+    }
+}
+.about .about-content .image img{
+    max-width: 100%;
+}
+.about .about-content .text{
+    flex-basis: calc(100% - 500px);   /*ادينا للنصوص مساحة كل الصفحه مطروح منها الصورة بالرسمه بالجاب*/
+}
+.about .about-content .text p:first-of-type{    /* البرجراف الاول داخل الكلاس تكست */
+    font-weight: bold;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+.about .about-content .text hr{
+    width: 50%;
+    display: inline-block;    /*علشان يجى من اول الصف*/
+    border-color: var(--main-color);   /*التحكم فى لون الخط من خلال البوردر كالر*/
+}
+.about .about-content .text p:last-of-type{
+    line-height: 1.8;
+    color: #777;
+}
+/* Start About */
+
+/* Start Contact */
+.contact{
+    padding: var(--section-padding);
+    background-color: var(--section-background);
+}
+.contact .info{
+    padding: var(--section-padding);      /*ادينالها بادينج من فوق ومن تحت بالمتغير اللى عملينه*/
+    text-align: center;                   /*الكلام كله يجى فى النص*/
+}
+.contact .info .laple{
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--secondary-color);
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+}
+.contact .info .link{
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--main-color);
+    text-decoration: none;
+    max-width: 100%;
+}
+.contact .info .social{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.contact .info .social i{
+    margin-left: 10px;
+    color: var(--secondary-color);
+}
+@media (max-width: 767px){
+    .contact .info .laple,
+    .contact .info .link{
+        font-size: 20px;
+    }
+    .contact .info .social{
+        font-size: 11px;
+    }
+}
+/* End Contact */
+
+/* Start Footer */
+.footer{
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 30px 10px;    /*طبعا لما بياخد بادينج بيكونله مساحه ارتفاع خليناها 30 ومن الجناب خلينها 10 علشان ميتعارضش مع شاشة الموبايل*/
+}
+.footer span{
+    font-weight: bold;
+    color: var(--main-color);
+}
+/* End Footer */
+
